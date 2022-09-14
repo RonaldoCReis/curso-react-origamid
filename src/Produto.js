@@ -1,12 +1,11 @@
 import React from "react";
 
-const Produto = ({ dados }) => {
+const Produto = ({ nome, preco }) => {
   return (
-    <div>
-      <h1>{dados.nome}</h1>
-      <p>{dados.preco}</p>
-      <img src={dados.fotos[0].src} alt={dados.fotos[0].alt} />
-    </div>
+    <>
+      <h2>{nome}</h2>
+      <p>R$ {preco}</p>
+    </>
   );
 };
 
