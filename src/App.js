@@ -1,40 +1,104 @@
+// Faça um fetch (POST) para a API abaixo
+// Para a criação ser aceita é necessário enviar dodos de:
+// nome, email, senha, cep, rua, numero, bairro, cidade e estado
+
+// Essa é a função utilizado para realizar o POST
+// fetch('https://ranekapi.origamid.dev/json/api/usuario', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   // form é o objeto com os dados do formulário
+//   body: JSON.stringify(form),
+// });
+
+// Mostre uma mensagem na tela, caso a resposta da API seja positiva
+
 import React from 'react';
-import useFetch from './useFetch';
-import useLocalStorage from './useLocalStorage';
 
 const App = () => {
-  const [produto, setProduto] = useLocalStorage('produto', '');
-  const { request, data, loading, error } = useFetch();
-  function handleClick({ target }) {
-    setProduto(target.innerText);
+  const fields = [
+    {
+      id: 'nome',
+    },
+    {
+      id: 'email',
+      type: 'email',
+    },
+    {
+      id: 'senha',
+      type: 'password',
+    },
+    {
+      id: 'cep',
+    },
+    {
+      id: 'rua',
+    },
+    {
+      id: 'bairro',
+    },
+    {
+      id: 'cidade',
+    },
+    {
+      id: 'estado',
+    },
+  ];
+  const [form, setForm] = React.useState(
+    fields.reduce((acc, field) => {
+      return {
+        ...acc,
+        [field.id]: '',
+      };
+    }, {})
+  );
+  function inputChange({ target }) {
+    const { id, value } = target;
+    setForm({ ...form, [id]: value });
   }
 
-  React.useEffect(() => {
-    async function fetchData() {
-      const { response } = await request(
-        'https://ranekapi.origamid.dev/json/api/produto/'
-      );
-      console.log(response);
-    }
+  const [fetchResp, setFetchResp] = React.useState('');
 
-    fetchData();
-  }, [request]);
+  function submitForm(event) {
+    event.preventDefault();
+    setFetchResp('Enviando...');
+    fetch('https://ranekapi.origamid.dev/json/api/usuario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // form é o objeto com os dados do formulário
+      body: JSON.stringify(form),
+    }).then((response) => {
+      if (response.ok) {
+        setFetchResp('Enviado');
+      } else {
+        setFetchResp('Erro');
+      }
+    });
+  }
 
   return (
-    <div>
-      <p>Produto preferido: {produto}</p>
-      <button onClick={handleClick}>notebook</button>
-      <button onClick={handleClick}>smartphone</button>
+    <form onSubmit={submitForm}>
+      {fields.map(({ id, type }) => (
+        <div key={id}>
+          <label style={{ textTransform: 'capitalize' }} htmlFor={id}>
+            {id}
+          </label>
+          <input
+            type={type ? type : 'text'}
+            id={id}
+            value={form[id]}
+            onChange={inputChange}
+          ></input>
+        </div>
+      ))}
 
-      {data &&
-        data.map((produto) => (
-          <div key={produto.id}>
-            <h1>{produto.nome}</h1>
-          </div>
-        ))}
-      {loading && <p>Carregando...</p>}
-      {error && <p>{error}</p>}
-    </div>
+      <button>Enviar</button>
+      {fetchResp && <p>{fetchResp}</p>}
+    </form>
   );
 };
+
 export default App;
