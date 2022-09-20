@@ -10,9 +10,7 @@ const Radio = ({ options, name, value, setValue, ...props }) => {
             name={name}
             type="radio"
             checked={value === option}
-            onChange={({ target }) =>
-              setValue((form) => ({ ...form, [target.name]: target.value }))
-            }
+            onChange={({ target }) => setValue(target.value)}
             {...props}
           />
           {option}

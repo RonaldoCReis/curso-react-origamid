@@ -1,52 +1,57 @@
 import React from 'react';
-import Input from './form/Input';
-import Select from './form/Select';
-import Radio from './form/Radio';
-import Checkbox from './form/Checkbox';
+import Pergunta from './Pergunta';
+const perguntas = [
+  {
+    pergunta: 'Qual método é utilizado para criar componentes?',
+    options: [
+      'React.makeComponent()',
+      'React.createComponent()',
+      'React.createElement()',
+    ],
+    resposta: 'React.createElement()',
+    id: 'p1',
+  },
+  {
+    pergunta: 'Como importamos um componente externo?',
+    options: [
+      'import Component from "./Component"',
+      'require("./Component")',
+      'import "./Component"',
+    ],
+    resposta: 'import Component from "./Component"',
+    id: 'p2',
+  },
+  {
+    pergunta: 'Qual hook não é nativo?',
+    options: ['useEffect()', 'useFetch()', 'useCallback()'],
+    resposta: 'useFetch()',
+    id: 'p3',
+  },
+  {
+    pergunta: 'Qual palavra deve ser utilizada para criarmos um hook?',
+    options: ['set', 'get', 'use'],
+    resposta: 'use',
+    id: 'p4',
+  },
+];
 
 const App = () => {
-  const [form, setForm] = React.useState({
-    nome: '',
-    email: '',
-    produto: '',
-    cor: '',
-  });
-  const [linguagens, setLinguagens] = React.useState([]);
+  const [perguntaAtual, setPerguntaAtual] = React.useState(0);
+  const [acertos, setAcertos] = React.useState(0);
   return (
-    <form>
-      <Checkbox
-        id="linguagens"
-        value={linguagens}
-        setValue={setLinguagens}
-        options={['Javascript', 'PHP', 'Ruby']}
-      />
-      <Radio
-        name="cor"
-        options={['Azul', 'Vermelho']}
-        value={form.cor}
-        setValue={setForm}
-      />
-      <Select
-        id="produto"
-        value={form.produto}
-        setValue={setForm}
-        options={['smartphone', 'tablet']}
-      />
-      <Input
-        id="nome"
-        label="Nome"
-        type="text"
-        value={form.nome}
-        setValue={setForm}
-      />
-      <Input
-        id="email"
-        label="Email"
-        type="email"
-        value={form.email}
-        setValue={setForm}
-      />
-    </form>
+    <div>
+      {perguntaAtual < perguntas.length ? (
+        <Pergunta
+          {...perguntas[perguntaAtual]}
+          setPergunta={setPerguntaAtual}
+          setAcertos={setAcertos}
+        />
+      ) : (
+        <div>
+          Acertou {acertos} de {perguntas.length} perguntas
+        </div>
+      )}
+    </div>
   );
 };
 export default App;
