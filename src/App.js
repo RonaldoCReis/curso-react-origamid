@@ -1,57 +1,16 @@
 import React from 'react';
-import Pergunta from './Pergunta';
-const perguntas = [
-  {
-    pergunta: 'Qual método é utilizado para criar componentes?',
-    options: [
-      'React.makeComponent()',
-      'React.createComponent()',
-      'React.createElement()',
-    ],
-    resposta: 'React.createElement()',
-    id: 'p1',
-  },
-  {
-    pergunta: 'Como importamos um componente externo?',
-    options: [
-      'import Component from "./Component"',
-      'require("./Component")',
-      'import "./Component"',
-    ],
-    resposta: 'import Component from "./Component"',
-    id: 'p2',
-  },
-  {
-    pergunta: 'Qual hook não é nativo?',
-    options: ['useEffect()', 'useFetch()', 'useCallback()'],
-    resposta: 'useFetch()',
-    id: 'p3',
-  },
-  {
-    pergunta: 'Qual palavra deve ser utilizada para criarmos um hook?',
-    options: ['set', 'get', 'use'],
-    resposta: 'use',
-    id: 'p4',
-  },
-];
-
+import './App.css';
+import Produto from './Produto';
 const App = () => {
-  const [perguntaAtual, setPerguntaAtual] = React.useState(0);
-  const [acertos, setAcertos] = React.useState(0);
+  const [ativar, setAtivar] = React.useState(false);
   return (
     <div>
-      {perguntaAtual < perguntas.length ? (
-        <Pergunta
-          {...perguntas[perguntaAtual]}
-          setPergunta={setPerguntaAtual}
-          setAcertos={setAcertos}
-        />
-      ) : (
-        <div>
-          Acertou {acertos} de {perguntas.length} perguntas
-        </div>
-      )}
+      <button onClick={() => setAtivar((ativar) => (ativar = !ativar))}>
+        Ativar
+      </button>
+      {ativar && <Produto />}
     </div>
   );
 };
+
 export default App;
