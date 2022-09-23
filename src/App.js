@@ -17,7 +17,7 @@ const App = () => {
     <BrowserRouter>
       <div className={styles.container}>
         <Header />
-        <Routes className={'animLeft'}>
+        <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/produto/:id/*" element={<Product />} />
