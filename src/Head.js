@@ -1,13 +1,9 @@
 import React from 'react';
 
-const Head = (props) => {
+const Head = ({ title }) => {
   React.useEffect(() => {
-    document.title = props.title;
-    document
-      .querySelector('meta[name="description"]')
-      .setAttribute('content', props.description);
-    console.log(props);
-  }, [props]);
+    document.title = `Renek | ${title}`;
+  }, [title]);
   return <></>;
 };
 

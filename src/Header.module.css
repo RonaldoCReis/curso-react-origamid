@@ -1,0 +1,20 @@
+.header {
+  margin: 40px 0;
+  display: flex;
+}
+
+.btnContainer {
+  margin-right: 20px;
+}
+
+.btn {
+  font-size: 1.3rem;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background: #ddd;
+}

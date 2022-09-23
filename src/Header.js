@@ -1,27 +1,20 @@
 import React from 'react';
-import './Header.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import styles from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const location = useLocation();
-
-  React.useEffect(() => {
-    console.log('Mudou a rota');
-  }, [location]);
-
   return (
-    <nav>
-      <NavLink to="/" activeStyle={{ color: 'tomato' }} end>
-        Home
-      </NavLink>{' '}
-      |{' '}
-      <NavLink activeStyle={{ color: 'tomato' }} to="sobre">
-        Sobre
-      </NavLink>{' '}
-      |{' '}
-      <NavLink activeStyle={{ color: 'tomato' }} to="login">
-        Login
-      </NavLink>
+    <nav className={styles.header}>
+      <div className={styles.btnContainer}>
+        <Link to="/">
+          <button className={styles.btn}>Produtos</button>
+        </Link>
+      </div>
+      <div className={styles.btnContainer}>
+        <Link to="/contato">
+          <button className={styles.btn}>Contato</button>
+        </Link>
+      </div>
     </nav>
   );
 };

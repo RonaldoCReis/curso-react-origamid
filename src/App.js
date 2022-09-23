@@ -1,30 +1,29 @@
+// Utilize a API abaixo para puxar a lista de produto
+// https://ranekapi.origamid.dev/json/api/produto
+// Cada produto possui o id, o mesmo pode ser passado na api para retornar os dados desse produto específico
+// https://ranekapi.origamid.dev/json/api/produto/notebook
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import Sobre from './Sobre';
-import Login from './Login';
-import Produto from './Produto';
+import Footer from './Footer';
 import Header from './Header';
-import NaoEncontrada from './NaoEncontrada';
-import ProdutoDescricao from './ProdutoDescricao';
-import ProdutoAvaliacao from './ProdutoAvaliacao';
-import ProdutoCustomizado from './ProdutoCustomizado';
+import Contact from './pages/Contact';
+import Product from './pages/Product';
+import Products from './pages/Products';
+import styles from './App.module.css';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="sobre" element={<Sobre />} />
-        <Route path="login" element={<Login />} />
-        <Route path="produto/:id" element={<Produto />}>
-          <Route path="" element={<ProdutoDescricao />} />
-          <Route path="avaliacao" element={<ProdutoAvaliacao />} />
-          <Route path="customizado" element={<ProdutoCustomizado />} />
-        </Route>
-        <Route path="*" element={<NaoEncontrada />} />
-      </Routes>
+      <div className={styles.container}>
+        <Header />
+        <Routes className={'animLeft'}>
+          <Route path="/" element={<Products />} />
+          <Route path="/contato" element={<Contact />} />
+          <Route path="/produto/:id/*" element={<Product />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 };

@@ -1,0 +1,19 @@
+.product {
+  width: 100%;
+  text-decoration: none;
+  margin-bottom: 50px;
+}
+
+.product img {
+  display: block;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.product h2 {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+  margin: 15px 0;
+}
